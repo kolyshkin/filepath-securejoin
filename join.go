@@ -53,7 +53,7 @@ func SecureJoinVFS(root, unsafePath string, vfs VFS) (string, error) {
 		}
 
 		// Next path component, p.
-		i := strings.IndexRune(unsafePath, filepath.Separator)
+		i := strings.IndexByte(unsafePath, filepath.Separator)
 		var p string
 		if i == -1 {
 			p, unsafePath = unsafePath, ""
@@ -81,7 +81,7 @@ func SecureJoinVFS(root, unsafePath string, vfs VFS) (string, error) {
 		// can't do any better here).
 		if IsNotExist(err) || fi.Mode()&os.ModeSymlink == 0 {
 			path.WriteString(p)
-			path.WriteRune(filepath.Separator)
+			path.WriteByte(filepath.Separator)
 			continue
 		}
 
